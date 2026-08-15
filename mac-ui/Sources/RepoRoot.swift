@@ -1,7 +1,7 @@
 import Foundation
 
 enum RepoRoot {
-    /// Resolves the deepseek-harness checkout this app should launch.
+    /// Resolves the ThinkInAI checkout this app should launch.
     ///
     /// Order: `DSH_REPO_ROOT`, the path written at build time, then
     /// `<app>/../../` when the bundle still lives in `mac-ui/`.

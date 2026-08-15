@@ -5,19 +5,19 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh-Hans</string>
 	<key>CFBundleDisplayName</key>
-	<string>DeepSeek Harness</string>
+	<string>ThinkInAI</string>
 	<key>CFBundleExecutable</key>
-	<string>DeepSeekHarness</string>
+	<string>ThinkInAI</string>
 	<key>CFBundleIconFile</key>
 	<string>AppIcon</string>
 	<key>CFBundleIconName</key>
 	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
-	<string>local.deepseek.harness.mac-ui</string>
+	<string>local.thinkinai.mac-ui</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>DeepSeek Harness</string>
+	<string>ThinkInAI</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

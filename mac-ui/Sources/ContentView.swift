@@ -12,13 +12,15 @@ struct ContentView: View {
                 StatusPane(
                     title: "启动失败",
                     detail: message,
+                    log: nil,
                     showsProgress: false,
                     retry: { server.start() }
                 )
             case .idle, .starting:
                 StatusPane(
-                    title: "正在启动 DeepSeek Harness",
-                    detail: "正在连接 http://127.0.0.1:3080 …",
+                    title: "正在启动 ThinkInAI",
+                    detail: startingDetail(server.logText),
+                    log: server.logText,
                     showsProgress: true,
                     retry: nil
                 )
@@ -28,9 +30,23 @@ struct ContentView: View {
     }
 }
 
+private func startingDetail(_ log: String) -> String {
+    if log.contains("正在执行 pnpm run build") {
+        return "正在执行 pnpm run build（首次可能需要几分钟）…"
+    }
+    if log.contains("正在执行 pnpm install") {
+        return "正在执行 pnpm install…"
+    }
+    if log.contains("正在启动 pnpm dsh web") {
+        return "正在连接 http://127.0.0.1:3080 …"
+    }
+    return "若尚未安装依赖或构建产物，会先执行 nvm use 22、pnpm install、pnpm run build。"
+}
+
 private struct StatusPane: View {
     let title: String
     let detail: String
+    let log: String?
     let showsProgress: Bool
     let retry: (() -> Void)?
 
@@ -48,6 +64,15 @@ private struct StatusPane: View {
                 .textSelection(.enabled)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: 560)
+            if let log, !log.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                ScrollView {
+                    Text(log)
+                        .font(.system(.caption, design: .monospaced))
+                        .textSelection(.enabled)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(maxWidth: 720, maxHeight: 240)
+            }
             if let retry {
                 Button("重试", action: retry)
                     .keyboardShortcut(.defaultAction)

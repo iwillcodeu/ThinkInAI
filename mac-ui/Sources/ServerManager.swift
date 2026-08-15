@@ -19,11 +19,13 @@ final class ServerManager: ObservableObject {
     }
 
     @Published private(set) var phase: Phase = .idle
+    @Published private(set) var logText = ""
     let url = URL(string: "http://127.0.0.1:3080/")!
 
     private var process: Process?
     private var ownsProcess = false
     private let log = LogBuffer()
+    private let readyDeadline: TimeInterval = 45 * 60
 
     private init() {}
 
@@ -45,6 +47,8 @@ final class ServerManager: ObservableObject {
     }
 
     private func boot() async {
+        log.clear()
+        logText = ""
         guard let repo = RepoRoot.resolve() else {
             phase = .failed("找不到仓库根目录。请把 App 留在 mac-ui/ 下重新构建，或设置环境变量 DSH_REPO_ROOT。")
             return
@@ -56,7 +60,7 @@ final class ServerManager: ObservableObject {
             phase = .ready(owned: false)
             return
         case .other:
-            phase = .failed("127.0.0.1:3080 已被其他程序占用，且不是 DeepSeek Harness。")
+            phase = .failed("127.0.0.1:3080 已被其他程序占用，且不是 ThinkInAI。")
             return
         case .down:
             break
@@ -70,14 +74,15 @@ final class ServerManager: ObservableObject {
             return
         }
 
-        let deadline = Date().addingTimeInterval(60)
+        let deadline = Date().addingTimeInterval(readyDeadline)
         while Date() < deadline {
+            logText = log.snapshot()
             if let process, !process.isRunning {
-                let tail = log.snapshot().trimmingCharacters(in: .whitespacesAndNewlines)
+                let tail = logText.trimmingCharacters(in: .whitespacesAndNewlines)
                 let detail = tail.isEmpty
-                    ? "请确认已执行 pnpm install 与 pnpm run build，且本机有 Node 22 与 pnpm。"
+                    ? "请确认本机有 Node 22 与 pnpm；首次打开会自动执行 pnpm install 与 pnpm run build。"
                     : tail
-                phase = .failed("dsh web 进程已退出。\n\n\(detail)")
+                phase = .failed("准备或启动 dsh web 失败，进程已退出。\n\n\(detail)")
                 ownsProcess = false
                 self.process = nil
                 return
@@ -88,13 +93,14 @@ final class ServerManager: ObservableObject {
             }
             try? await Task.sleep(for: .milliseconds(300))
         }
-        phase = .failed("等待 dsh web 启动超时（60 秒）。")
+        logText = log.snapshot()
+        phase = .failed("等待仓库准备或 dsh web 启动超时（45 分钟）。")
     }
 
     private func launch(repo: URL) throws -> Process {
         guard let script = Bundle.main.url(forResource: "launch-dsh-web", withExtension: "sh") else {
             throw NSError(
-                domain: "DeepSeekHarness",
+                domain: "ThinkInAI",
                 code: 1,
                 userInfo: [NSLocalizedDescriptionKey: "App 包内缺少 launch-dsh-web.sh"]
             )

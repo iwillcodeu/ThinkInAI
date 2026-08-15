@@ -18,4 +18,10 @@ final class LogBuffer: @unchecked Sendable {
         defer { lock.unlock() }
         return text
     }
+
+    func clear() {
+        lock.lock()
+        defer { lock.unlock() }
+        text = ""
+    }
 }

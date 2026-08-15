@@ -38,5 +38,5 @@ apps/web/dist/
 worktrees/
 .agents/worktrees/
 .typert-*/
-mac-ui/DeepSeekHarness.app/
+mac-ui/ThinkInAI.app/
 mac-ui/.build/

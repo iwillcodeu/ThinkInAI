@@ -4,7 +4,7 @@ import Foundation
 guard CommandLine.arguments.count >= 4,
       let pixels = Int(CommandLine.arguments[3])
 else {
-    FileHandle.standardError.write(Data("usage: rasterize-svg.swift <in.svg> <out.png> <pixels>\n".utf8))
+    FileHandle.standardError.write(Data("usage: rasterize-svg.swift <in.image> <out.png> <pixels>\n".utf8))
     exit(2)
 }
 
@@ -34,10 +34,22 @@ rep.size = NSSize(width: pixels, height: pixels)
 NSGraphicsContext.saveGraphicsState()
 NSGraphicsContext.current = NSGraphicsContext(bitmapImageRep: rep)
 NSGraphicsContext.current?.imageInterpolation = .high
+NSGraphicsContext.current?.cgContext.clear(CGRect(x: 0, y: 0, width: pixels, height: pixels))
+
+let canvas = CGFloat(pixels)
+let srcSize = image.size
+let scale = min(canvas / srcSize.width, canvas / srcSize.height)
+let drawW = srcSize.width * scale
+let drawH = srcSize.height * scale
 image.draw(
-    in: NSRect(x: 0, y: 0, width: pixels, height: pixels),
+    in: NSRect(
+        x: (canvas - drawW) / 2,
+        y: (canvas - drawH) / 2,
+        width: drawW,
+        height: drawH
+    ),
     from: .zero,
-    operation: .copy,
+    operation: .sourceOver,
     fraction: 1
 )
 NSGraphicsContext.restoreGraphicsState()

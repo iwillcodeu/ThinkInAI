@@ -1,12 +1,12 @@
 import SwiftUI
 
 @main
-struct DeepSeekHarnessApp: App {
+struct ThinkInAIApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     @ObservedObject private var server = ServerManager.shared
 
     var body: some Scene {
-        Window("DeepSeek Harness", id: "main") {
+        Window("ThinkInAI", id: "main") {
             ContentView(server: server)
                 .frame(minWidth: 960, minHeight: 640)
         }

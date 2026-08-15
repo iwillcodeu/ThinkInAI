@@ -3,8 +3,8 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 REPO="$(cd "$ROOT/.." && pwd)"
-APP="$ROOT/DeepSeekHarness.app"
-BIN="$APP/Contents/MacOS/DeepSeekHarness"
+APP="$ROOT/ThinkInAI.app"
+BIN="$APP/Contents/MacOS/ThinkInAI"
 RESOURCES="$APP/Contents/Resources"
 SDK="$(xcrun --show-sdk-path --sdk macosx)"
 ARCH="$(uname -m)"
@@ -15,7 +15,7 @@ else
   TARGET="x86_64-apple-macosx14.0"
 fi
 
-rm -rf "$APP"
+rm -rf "$APP" "$ROOT/DeepSeekHarness.app"
 mkdir -p "$APP/Contents/MacOS" "$RESOURCES"
 
 swiftc -parse-as-library -O -o "$BIN" \
@@ -30,7 +30,7 @@ ICONSET="$ROOT/.build/AppIcon.iconset"
 ICNS="$ROOT/.build/AppIcon.icns"
 MASTER="$ROOT/.build/AppIcon-1024.png"
 mkdir -p "$ICONSET"
-swift "$ROOT/scripts/rasterize-svg.swift" "$ROOT/Assets/AppIcon.svg" "$MASTER" 1024
+swift "$ROOT/scripts/rasterize-svg.swift" "$ROOT/Assets/AppIcon.png" "$MASTER" 1024
 for spec in \
   "icon_16x16.png:16" \
   "icon_16x16@2x.png:32" \
