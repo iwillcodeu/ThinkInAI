@@ -84,16 +84,18 @@
   from { opacity: 0; }
 }
 
-/* Logo row (figma pad (4,8,4,8)): expanded keeps the panel toggle at the
-   right edge; the rail gives every control the same base left anchor before
+/* Logo row (figma pad (4,8,4,8)): expanded stacks the DeepSeek wordmark
+   over the same-size ThinkInAI bar and keeps the panel toggle at the
+   top-right; the rail gives every control the same base left anchor before
    the shared entry translation is applied. */
 .logoRow {
   flex: none;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-end;
   gap: 8px;
-  height: 60px;
+  min-height: 72px;
+  height: auto;
   padding: 8px 0 8px 4px;
   margin-bottom: 8px;
   box-sizing: border-box;
@@ -104,6 +106,7 @@
   height: 36px;
   padding: 0;
   margin-bottom: 12px;
+  align-items: center;
   justify-content: flex-start;
 }
 
@@ -115,13 +118,20 @@
   flex: 1;
   min-width: 0;
   display: inline-flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
   overflow: hidden;
   padding: 0;
   border: none;
   background: transparent;
   color: inherit;
   cursor: pointer;
+}
+
+.brand svg {
+  display: block;
+  flex: none;
 }
 
 .iconButton {

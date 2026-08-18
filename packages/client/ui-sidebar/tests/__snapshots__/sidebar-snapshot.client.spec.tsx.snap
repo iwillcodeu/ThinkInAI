@@ -108,6 +108,14 @@ exports[`sidebar shell snapshots > renders the expanded column (wordmark, capsul
           viewBox="0 0 182 24"
           width="182"
         />
+        <svg
+          aria-hidden="true"
+          data-content="8e3d44c9"
+          fill="none"
+          height="24"
+          viewBox="0 0 182 24"
+          width="182"
+        />
       </button>
       <button
         aria-label="Collapse sidebar"
@@ -196,6 +204,14 @@ exports[`sidebar shell snapshots > renders the expanded column in the default lo
         <svg
           aria-hidden="true"
           data-content="951274b9"
+          fill="none"
+          height="24"
+          viewBox="0 0 182 24"
+          width="182"
+        />
+        <svg
+          aria-hidden="true"
+          data-content="8e3d44c9"
           fill="none"
           height="24"
           viewBox="0 0 182 24"

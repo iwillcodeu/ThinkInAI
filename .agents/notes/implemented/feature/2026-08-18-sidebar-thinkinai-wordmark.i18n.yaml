@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-08-18-sidebar-thinkinai-wordmark.md
+2026-08-18-sidebar-thinkinai-wordmark.md: 3fa0d3fdb46c3ca48d56cbb6437ead9930397a32
+2026-08-18-sidebar-thinkinai-wordmark.zh.md: 0ac47a05d04a47d48985b796765da0c0b4d24c69

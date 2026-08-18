@@ -63,4 +63,15 @@ describe('SidebarRoot.module.css', () => {
     expect(declarations('.collapsed .newSession')?.get('align-self')).toBe('flex-start')
     expect(declarations('.collapsed .newSession')?.get('width')).toBe('36px')
   })
+
+  it('stacks the two wordmarks in the expanded brand button', () => {
+    expect(declarations('.logoRow')?.get('min-height')).toBe('72px')
+    expect(declarations('.logoRow')?.get('height')).toBe('auto')
+    expect(declarations('.logoRow')?.get('align-items')).toBe('flex-start')
+    expect(declarations('.brand')?.get('flex-direction')).toBe('column')
+    expect(declarations('.brand')?.get('gap')).toBe('8px')
+    expect(declarations('.brand svg')?.get('display')).toBe('block')
+    expect(declarations('.collapsed .logoRow')?.get('height')).toBe('36px')
+    expect(declarations('.collapsed .logoRow')?.get('align-items')).toBe('center')
+  })
 })
