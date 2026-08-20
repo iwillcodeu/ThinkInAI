@@ -72,4 +72,15 @@ describe('SidebarRoot.module.css', () => {
     expect(declarations('.fallbackBrandName')?.get('font-size')).toBe('17px')
     expect(declarations('.fallbackBrandName')?.get('white-space')).toBe('nowrap')
   })
+
+  it('stacks the ThinkInAI bar under the slotted brand row', () => {
+    expect(declarations('.logoRow')?.get('min-height')).toBe('72px')
+    expect(declarations('.logoRow')?.get('height')).toBe('auto')
+    expect(declarations('.logoRow')?.get('align-items')).toBe('flex-start')
+    expect(declarations('.brand')?.get('flex-direction')).toBe('column')
+    expect(declarations('.brand')?.get('gap')).toBe('8px')
+    expect(declarations('.brand svg')?.get('display')).toBe('block')
+    expect(declarations('.collapsed .logoRow')?.get('height')).toBe('36px')
+    expect(declarations('.collapsed .logoRow')?.get('align-items')).toBe('center')
+  })
 })

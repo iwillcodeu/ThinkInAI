@@ -21,6 +21,7 @@ import {
   FishLogo, IconNewChatOutline16, IconPanelLeftOutline16, Tooltip,
 } from '@deepseek-ai/dsh-client-ui-primitives'
 import type { SidebarRootComponentProps } from './contract/slots.ts'
+import { ThinkInAIWordmark } from './ThinkInAIWordmark.tsx'
 import css from './SidebarRoot.module.css'
 
 /** Wide-content unmount delay; matches the 150ms wide-content fade-out. */
@@ -152,6 +153,7 @@ export function SidebarRoot({
                 })}
               </span>
             </span>
+            <ThinkInAIWordmark />
           </button>
         )}
         {/* Rail resting state is the whale mark; hovering swaps in the panel
