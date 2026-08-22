@@ -53,5 +53,7 @@ if [ ! -f apps/web/dist/index.html ] || [ ! -f packages/client/connection/lib/cl
   pnpm run build || exit 1
 fi
 
-echo "正在启动 pnpm dsh web…"
-exec pnpm dsh web
+# The App already embeds the UI in WKWebView; do not also open the
+# system browser (dsh web defaults to openBrowser: true).
+echo "正在启动 pnpm dsh web --no-open…"
+exec pnpm dsh web --no-open

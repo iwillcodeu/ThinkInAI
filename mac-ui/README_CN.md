@@ -60,7 +60,7 @@ open /path/to/ThinkInAI/mac-ui/ThinkInAI.app
 ### 点开之后
 
 1. App 检查 `http://127.0.0.1:3080`。若已经是本仓库的 Harness（首页带启动清单，且 connection 插件 JS 可取），就直接连上，退出时不停止该服务。
-2. 否则用 nvm 的 Node 22 在仓库根目录准备环境：没有 `node_modules` 就执行 `pnpm install`，缺少 `apps/web/dist/index.html` 或 `packages/client/connection/lib/client.js` 就执行 `pnpm run build`，然后启动 `pnpm dsh web`。关掉 App 时一并停止该进程。
+2. 否则用 nvm 的 Node 22 在仓库根目录准备环境：没有 `node_modules` 就执行 `pnpm install`，缺少 `apps/web/dist/index.html` 或 `packages/client/connection/lib/client.js` 就执行 `pnpm run build`，然后启动 `pnpm dsh web --no-open`（App 自己的窗口已承载 UI，不再打开系统浏览器）。关掉 App 时一并停止该进程。
 3. 窗口里就是 Web UI。第一次用：打开**设置 → 模型**，填入 DeepSeek API 密钥并保存；再点**选择工作区**，选一个项目目录。选中工作区前不能发消息。
 
 窗口若一度出现 `Failed to load plugins`，App 会自动重载几次（服务刚起来时的竞态）。若一直失败，先看窗口里的启动日志，然后关掉 App 再打开。

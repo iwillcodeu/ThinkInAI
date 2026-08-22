@@ -60,7 +60,7 @@ Do not copy only the `.app` into `/Applications` and discard this git checkout. 
 ### After it opens
 
 1. The app checks `http://127.0.0.1:3080`. If that is already this checkout's Harness (index has the boot manifest, and the connection plugin JS is reachable), it attaches and does not stop that server on quit.
-2. Otherwise it uses nvm Node 22 in the repo root: `pnpm install` if `node_modules` is missing, `pnpm run build` if `apps/web/dist/index.html` or `packages/client/connection/lib/client.js` is missing, then `pnpm dsh web`. Quitting the app stops that process.
+2. Otherwise it uses nvm Node 22 in the repo root: `pnpm install` if `node_modules` is missing, `pnpm run build` if `apps/web/dist/index.html` or `packages/client/connection/lib/client.js` is missing, then `pnpm dsh web --no-open` (the app window already hosts the UI, so the system browser stays closed). Quitting the app stops that process.
 3. The window is the Web UI. First use: open **Settings → Models**, enter a DeepSeek API key and save; then **Choose workspace** and select a project directory. The session input stays disabled until a workspace is selected.
 
 If the window briefly shows `Failed to load plugins`, the app reloads a few times (a race while the server is coming up). If it keeps failing, read the startup log in the window, then quit and reopen the app.
