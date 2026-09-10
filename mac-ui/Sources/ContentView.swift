@@ -37,6 +37,9 @@ private func startingDetail(_ log: String) -> String {
     if log.contains("正在执行 pnpm install") {
         return "正在执行 pnpm install…"
     }
+    if log.contains("dsh web: http://127.0.0.1:") {
+        return "已拿到启动 URL，正在完成登录并加载界面…"
+    }
     if log.contains("正在启动 pnpm dsh web") {
         // Matches both the bare start line and `… --no-open`.
         return "正在连接 http://127.0.0.1:3080 …"

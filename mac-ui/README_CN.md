@@ -2,7 +2,7 @@
 
 [English](README.md) | 中文
 
-本地 Mac 启动器。点开 `ThinkInAI.app` 后，它会启动本仓库的 `dsh web`，并在独立窗口里打开 Web UI。若缺少 `node_modules` 或 Web 产物，会先执行 `nvm use 22`、`pnpm install`、`pnpm run build`。
+本地 Mac 启动器。点开 `ThinkInAI.app` 后，它会启动本仓库的 `dsh web`，读取日志里带 `?token=` 的启动 URL，并在独立窗口里打开 Web UI（与浏览器相同的进程 token 登录）。若缺少 `node_modules` 或 Web 产物，会先执行 `nvm use 22`、`pnpm install`、`pnpm run build`。
 
 `ThinkInAI.app` 和 `mac-ui/.build/` 是构建产物，不提交。
 

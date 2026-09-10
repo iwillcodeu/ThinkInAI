@@ -2,7 +2,7 @@
 
 English | [中文](README_CN.md)
 
-A local Mac launcher. Opening `ThinkInAI.app` starts this checkout's `dsh web` and shows the Web UI in its own window. If `node_modules` or the Web artifacts are missing, the app runs `nvm use 22`, `pnpm install`, and `pnpm run build` first.
+A local Mac launcher. Opening `ThinkInAI.app` starts this checkout's `dsh web`, reads the printed `?token=` launch URL, and shows the Web UI in its own window (same process-token login as a browser). If `node_modules` or the Web artifacts are missing, the app runs `nvm use 22`, `pnpm install`, and `pnpm run build` first.
 
 `ThinkInAI.app` and `mac-ui/.build/` are build outputs and are not committed.
 
